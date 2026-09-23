@@ -17,8 +17,12 @@ A single lifecycle notification from an Agent (e.g. prompt submitted, tool start
 _Avoid_: Hook, message, signal
 
 **Pet State**:
-The named behaviour the Pet is currently showing (idle, thinking, working, sleeping, …), derived from Agent Events and user interaction.
+The named behaviour the Pet is currently showing (idle, thinking, working, sleeping, dragged, …), derived from Agent Events and user interaction. It lasts as long as its condition holds.
 _Avoid_: Animation, mode, status
+
+**Reaction**:
+A short, one-shot behaviour (e.g. to a double-click or rapid clicking) played on top of the current Pet State; when it ends, the Pet returns to whatever Pet State is current at that moment.
+_Avoid_: Pet State, interaction, emote
 
 **Built-in Integration**:
 An Agent whose Agent Events the Pet knows how to receive without the user writing glue; Claude Code is the only one.

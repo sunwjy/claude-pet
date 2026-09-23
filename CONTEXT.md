@@ -17,7 +17,10 @@ A single lifecycle notification from an Agent (e.g. prompt submitted, tool start
 _Avoid_: Hook, message, signal
 
 **Pet State**:
-The named behaviour the Pet is currently showing (idle, thinking, working, sleeping, dragged, …), derived from Agent Events and user interaction. It lasts as long as its condition holds.
+The named behaviour the Pet is currently showing (idle, sleeping, dragged, thinking, working, delegating, blocked, done, error), derived from Agent Events and user interaction. It lasts as long as its condition holds.
+- **done**: the Agent finished its turn and waits for the next prompt.
+- **blocked**: the Agent is mid-turn and waits for the user's permission or input.
+- **delegating**: the Agent has subagents running.
 _Avoid_: Animation, mode, status
 
 **Reaction**:

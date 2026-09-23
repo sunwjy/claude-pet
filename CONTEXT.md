@@ -16,8 +16,12 @@ _Avoid_: Client, integration, bot
 A single lifecycle notification from an Agent (e.g. prompt submitted, tool started, task finished) delivered to the Pet.
 _Avoid_: Hook, message, signal
 
+**Session**:
+One conversation between an Agent and the user. Each Session has its own Pet State, and the Pet shows the highest-priority Pet State among all Sessions.
+_Avoid_: Conversation, terminal, instance
+
 **Pet State**:
-The named behaviour the Pet is currently showing (idle, sleeping, dragged, thinking, working, delegating, blocked, done, error), derived from Agent Events and user interaction. It lasts as long as its condition holds.
+The named behaviour the Pet is currently showing (idle, sleeping, dragged, thinking, working, delegating, blocked, done, error), derived from Agent Events and user interaction. It lasts as long as its condition holds. Each Session has its own Pet State; the Pet shows the highest-priority one across all Sessions.
 - **done**: the Agent finished its turn and waits for the next prompt.
 - **blocked**: the Agent is mid-turn and waits for the user's permission or input.
 - **delegating**: the Agent has subagents running.

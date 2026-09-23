@@ -31,6 +31,10 @@ _Avoid_: Animation, mode, status
 A short, one-shot behaviour (e.g. to a double-click or rapid clicking) played on top of the current Pet State; when it ends, the Pet returns to whatever Pet State is current at that moment.
 _Avoid_: Pet State, interaction, emote
 
+**Theme**:
+A self-contained package that gives the Pet its look: how it appears in each Pet State and Reaction. The Pet ships with one original Theme; users may install others.
+_Avoid_: Skin, character pack, asset pack
+
 **Built-in Integration**:
 An Agent whose Agent Events the Pet knows how to receive without the user writing glue; Claude Code is the only one.
 _Avoid_: Plugin, adapter

@@ -14,7 +14,7 @@ pub struct Presenter {
     conn: RustConnection,
     win: u32,
     gc: u32,
-    last_mask: Vec<Rectangle>,
+    last_mask: Vec<(i16, i16, u16)>,
 }
 
 impl Presenter {
@@ -71,11 +71,12 @@ impl Presenter {
                 )
                 .unwrap();
         }
-        if rects != self.last_mask {
+        let key: Vec<_> = rects.iter().map(|r| (r.x, r.y, r.width)).collect();
+        if key != self.last_mask {
             self.conn
                 .shape_rectangles(shape::SO::SET, shape::SK::INPUT, ClipOrdering::YX_BANDED, self.win, 0, 0, &rects)
                 .unwrap();
-            self.last_mask = rects;
+            self.last_mask = key;
         }
         self.conn.flush().unwrap();
     }

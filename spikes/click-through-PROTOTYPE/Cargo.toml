@@ -1,0 +1,35 @@
+# PROTOTYPE — throwaway spike for issue #10 (click-through 투명 창 spike). Not production code.
+[package]
+name = "click-through-spike"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+winit = "0.30"
+resvg = "0.48"
+raw-window-handle = "0.6"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+tray-icon = "0.25"
+objc2 = "0.6"
+objc2-foundation = "0.3"
+objc2-app-kit = "0.3"
+objc2-quartz-core = "0.3"
+objc2-core-graphics = "0.3"
+objc2-core-foundation = "0.3"
+
+[target.'cfg(target_os = "windows")'.dependencies]
+tray-icon = "0.25"
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_Graphics_Gdi", "Win32_UI_WindowsAndMessaging"] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+tray-icon = { version = "0.25", default-features = false, features = ["ksni"] }
+x11rb = { version = "0.14", features = ["shape"] }
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"

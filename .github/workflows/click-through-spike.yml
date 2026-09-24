@@ -1,0 +1,32 @@
+# PROTOTYPE — builds the throwaway click-through spike (issue #10) on all three OSes.
+name: click-through spike (PROTOTYPE)
+on:
+  push:
+    branches: [prototype/click-through-spike]
+  workflow_dispatch:
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: spikes/click-through-PROTOTYPE
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release
+      - name: Binary size
+        run: ls -l target/release/click-through-spike* | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Linux shared-library deps (AppImage concern)
+        if: runner.os == 'Linux'
+        run: ldd target/release/click-through-spike | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: click-through-spike-${{ matrix.os }}
+          path: |
+            spikes/click-through-PROTOTYPE/target/release/click-through-spike
+            spikes/click-through-PROTOTYPE/target/release/click-through-spike.exe
